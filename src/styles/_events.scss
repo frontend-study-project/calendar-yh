@@ -1,0 +1,25 @@
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-item {
+  background: #fff;
+  padding: 1rem;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .edit-button {
+    color: $primary-color;
+    cursor: pointer;
+  }
+
+  .delete-button {
+    color: red;
+    cursor: pointer;
+  }
+}
