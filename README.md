@@ -34,7 +34,7 @@
 ┃ ┣ 📂 slice # Redux slice 설정    
 ┃ ┣ 📂 store # Redux store 설정    
 ┣ 📂 types # TypeScript 타입 정의    
-┃ ┗ 📜 eventTypes.ts # 일정 관련 타입 정의    
+┃ ┗ 📜 event.ts # 일정 관련 타입 정의    
 ┣ 📜 App.tsx # 루트 컴포넌트     
 ┣ 📜 main.tsx # React 엔트리 포인트      
 ┗ 📜 index.css # 글로벌 스타일   
