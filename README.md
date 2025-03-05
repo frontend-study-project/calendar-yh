@@ -24,17 +24,17 @@
 
 ## 📌 프로젝트 구조
 
-📂 src
+📂 src  
 ┣ 📂 components # UI 컴포넌트  
 ┃ ┣ 📜 Calendar.tsx # 캘린더 UI  
-┃ ┣ 📜 EventForm.tsx # 일정 추가/수정 폼 
-┃ ┣ 📜 EventSidebar.tsx # 일정 리스트 사이드 바 
-┣ 📂 hooks # hooks 설정 
-┣ 📂 redux # Redux 설정 
-┃ ┣ 📂 slice # Redux slice 설정
-┃ ┣ 📂 store # Redux store 설정 
-┣ 📂 types # TypeScript 타입 정의 
-┃ ┗ 📜 eventTypes.ts # 일정 관련 타입 정의
-┣ 📜 App.tsx # 루트 컴포넌트 
-┣ 📜 main.tsx # React 엔트리 포인트 
-┗ 📜 index.css # 글로벌 스타일
+┃ ┣ 📜 EventForm.tsx # 일정 추가/수정 폼   
+┃ ┣ 📜 EventSidebar.tsx # 일정 리스트 사이드 바    
+┣ 📂 hooks # hooks 설정    
+┣ 📂 redux # Redux 설정     
+┃ ┣ 📂 slice # Redux slice 설정    
+┃ ┣ 📂 store # Redux store 설정    
+┣ 📂 types # TypeScript 타입 정의    
+┃ ┗ 📜 eventTypes.ts # 일정 관련 타입 정의    
+┣ 📜 App.tsx # 루트 컴포넌트     
+┣ 📜 main.tsx # React 엔트리 포인트      
+┗ 📜 index.css # 글로벌 스타일   
