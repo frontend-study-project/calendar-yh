@@ -1,11 +1,5 @@
-import "../styles/main.scss";
-
-interface Event {
-  id: number;
-  title: string;
-  date: string;
-  reminder: string;
-}
+import '../styles/main.scss';
+import { Event } from '../types/event';
 
 interface EventModalProps {
   isOpen: boolean;
@@ -48,7 +42,7 @@ const EventModal = ({
           }
         />
         <button className="save-button" onClick={handleSaveEvent}>
-          {isEditing ? "수정" : "저장"}
+          {isEditing ? '수정' : '저장'}
         </button>
         {isEditing && (
           <button className="delete-button" onClick={handleDeleteEvent}>

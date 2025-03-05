@@ -1,12 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// 이벤트 타입 정의
-interface Event {
-  id: number;
-  title: string;
-  date: string;
-  reminder: string;
-}
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Event } from '../../types/event';
 
 // 초기 상태 타입 정의
 interface CalendarState {
@@ -20,7 +13,7 @@ const initialState: CalendarState = {
 
 // Slice 생성
 const calendarSlice = createSlice({
-  name: "calendar",
+  name: 'calendar',
   initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<Event>) => {

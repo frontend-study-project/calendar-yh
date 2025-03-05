@@ -1,12 +1,5 @@
-import "../styles/main.scss";
-
-// Props 타입 정의
-interface Event {
-  id: number;
-  title: string;
-  date: string;
-  reminder?: string;
-}
+import '../styles/main.scss';
+import { Event } from '../types/event';
 
 interface EventSidebarProps {
   events: Event[];
