@@ -19,6 +19,7 @@ const Calendar = () => {
       };
     }) => state.calendar.events
   );
+
   const [selectedDate, setSelectedDate] = useState("");
   const [today, setToday] = useState<string>("");
   const [newEvent, setNewEvent] = useState({
@@ -39,6 +40,13 @@ const Calendar = () => {
     goToNextMonth,
     goToToday,
   } = useCalendar();
+
+  // 날짜 포맷 함수
+  const formatDate = (y: number, m: number, d: number) => {
+    const mm = (m + 1).toString().padStart(2, "0");
+    const dd = d.toString().padStart(2, "0");
+    return `${y}-${mm}-${dd}`;
+  };
 
   const handleDateClick = (date: string) => {
     setSelectedDate(date);
@@ -71,23 +79,25 @@ const Calendar = () => {
     setIsModalOpen(false);
   };
 
-  // 오늘 버튼 클릭 시 오늘 날짜로 이동
   const handleGoToToday = () => {
     goToToday();
-
     const now = new Date();
-    const todayString = `${now.getFullYear()}-${
-      now.getMonth() + 1
-    }-${now.getDate()}`;
+    const todayString = formatDate(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
     setToday(todayString);
   };
 
-  // 캘린더 훅 아래에 추가
+  // 초기 today 상태 설정
   useEffect(() => {
     const now = new Date();
-    const todayString = `${now.getFullYear()}-${
-      now.getMonth() + 1
-    }-${now.getDate()}`;
+    const todayString = formatDate(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
     setToday(todayString);
   }, []);
 
@@ -105,7 +115,6 @@ const Calendar = () => {
             ▶
           </button>
         </div>
-        {/* 오늘 버튼 추가 */}
         <div className="calendar-bottom">
           <button className="today-button" onClick={handleGoToToday}>
             오늘
@@ -114,45 +123,38 @@ const Calendar = () => {
       </header>
 
       <div className="calendar-body">
-        {/* 사이드바를 `EventSidebar` 컴포넌트로 분리하여 사용 */}
         <EventSidebar events={events} onSelectDate={handleDateClick} />
 
-        {/* 캘린더 그리드 */}
         <main className="calendar-main">
           <div className="calendar-grid">
-            {/* 빈 공간 추가 (월의 시작 요일을 맞추기 위함) */}
             {[...Array(firstDayOfMonth)].map((_, i) => (
               <div key={`empty-${i}`} className="calendar-day empty"></div>
             ))}
-            {/* 실제 날짜 렌더링 */}
+
             {[...Array(daysInMonth)].map((_, i) => {
               const day = i + 1;
+              const formattedDate = formatDate(year, month, day);
+              const hasEvent = events.some(
+                (event) => event.date === formattedDate
+              );
+              const isToday = today === formattedDate;
+
               return (
                 <div
                   key={day}
-                  className={`calendar-day ${
-                    events.some(
-                      (event) => event.date === `${year}-${month + 1}-${day}`
-                    )
-                      ? "has-event"
-                      : ""
-                  } ${
-                    today === `${year}-${month + 1}-${day}`
-                      ? "today-highlight"
-                      : ""
+                  className={`calendar-day ${hasEvent ? "has-event" : ""} ${
+                    isToday ? "today-highlight" : ""
                   }`}
-                  onClick={() => handleDateClick(`${year}-${month + 1}-${day}`)}
+                  onClick={() => handleDateClick(formattedDate)}
                 >
                   {day}
-                  {events.some(
-                    (event) => event.date === `${year}-${month + 1}-${day}`
-                  ) && <span className="event-badge">📌</span>}
+                  {hasEvent && <span className="event-badge">📌</span>}
                 </div>
               );
             })}
           </div>
         </main>
-        {/* 모달 컴포넌트 사용 */}
+
         <EventModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
