@@ -9,11 +9,41 @@
 
 .calendar-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 1rem;
   background-color: $primary-color;
   color: white;
+}
+.calendar-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+.calendar-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+.nav-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.today-button {
+  background: none;
+  border: 0.1rem solid white;
+  padding: 0.5rem;
+  border-radius: 5rem;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .calendar-body {
