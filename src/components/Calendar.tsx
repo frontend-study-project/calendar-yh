@@ -73,21 +73,25 @@ const Calendar = () => {
   return (
     <div className="calendar-container">
       <header className="calendar-header">
-        <h1>
-          {year}.{(month + 1).toString().padStart(2, "0")}
-        </h1>
-        <div className="calendar-controls">
+        <div className="calendar-top">
           <button className="nav-button" onClick={goToPreviousMonth}>
             ◀
           </button>
+          <h1>
+            {year}.{(month + 1).toString().padStart(2, "0")}
+          </h1>
           <button className="nav-button" onClick={goToNextMonth}>
             ▶
           </button>
+        </div>
+        {/* 오늘 버튼 추가 */}
+        <div className="calendar-bottom">
           <button className="today-button" onClick={goToToday}>
             오늘
           </button>
         </div>
       </header>
+
       <div className="calendar-body">
         {/* 사이드바를 `EventSidebar` 컴포넌트로 분리하여 사용 */}
         <EventSidebar events={events} onSelectDate={handleDateClick} />
