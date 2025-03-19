@@ -38,9 +38,8 @@
 }
 .today-button {
   background: none;
-  border: 0.1rem solid white;
+  border: none;
   padding: 0.5rem;
-  border-radius: 5rem;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
@@ -82,6 +81,13 @@
   &:hover {
     background: #f0f8ff;
   }
+}
+
+.calendar-day.today-highlight {
+  background-color: #ffdd57; // 원하는 강조 색상
+  color: #333;
+  font-weight: bold;
+  border-radius: 0.5rem;
 }
 
 .has-event {

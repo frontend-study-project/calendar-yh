@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addEvent,
@@ -20,7 +20,7 @@ const Calendar = () => {
     }) => state.calendar.events
   );
   const [selectedDate, setSelectedDate] = useState("");
-
+  const [today, setToday] = useState<string>("");
   const [newEvent, setNewEvent] = useState({
     id: 0,
     title: "",
@@ -70,6 +70,27 @@ const Calendar = () => {
     dispatch(removeEvent(newEvent.id));
     setIsModalOpen(false);
   };
+
+  // 오늘 버튼 클릭 시 오늘 날짜로 이동
+  const handleGoToToday = () => {
+    goToToday();
+
+    const now = new Date();
+    const todayString = `${now.getFullYear()}-${
+      now.getMonth() + 1
+    }-${now.getDate()}`;
+    setToday(todayString);
+  };
+
+  // 캘린더 훅 아래에 추가
+  useEffect(() => {
+    const now = new Date();
+    const todayString = `${now.getFullYear()}-${
+      now.getMonth() + 1
+    }-${now.getDate()}`;
+    setToday(todayString);
+  }, []);
+
   return (
     <div className="calendar-container">
       <header className="calendar-header">
@@ -86,7 +107,7 @@ const Calendar = () => {
         </div>
         {/* 오늘 버튼 추가 */}
         <div className="calendar-bottom">
-          <button className="today-button" onClick={goToToday}>
+          <button className="today-button" onClick={handleGoToToday}>
             오늘
           </button>
         </div>
@@ -114,6 +135,10 @@ const Calendar = () => {
                       (event) => event.date === `${year}-${month + 1}-${day}`
                     )
                       ? "has-event"
+                      : ""
+                  } ${
+                    today === `${year}-${month + 1}-${day}`
+                      ? "today-highlight"
                       : ""
                   }`}
                   onClick={() => handleDateClick(`${year}-${month + 1}-${day}`)}
