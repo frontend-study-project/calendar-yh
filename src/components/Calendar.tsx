@@ -9,28 +9,22 @@ import "../styles/main.scss";
 import useCalendar from "../hooks/useCalendar";
 import EventSidebar from "./EventSidebar";
 import EventModal from "./EventModal";
+import { Event } from "../types/event";
 
 const Calendar = () => {
   const dispatch = useDispatch();
   const events = useSelector(
     (state: {
       calendar: {
-        events: { id: number; title: string; date: string; reminder: string }[];
+        events: Event[];
       };
     }) => state.calendar.events
   );
-
   const [selectedDate, setSelectedDate] = useState("");
   const [today, setToday] = useState<string>("");
-  const [newEvent, setNewEvent] = useState({
-    id: 0,
-    title: "",
-    date: "",
-    reminder: "",
-  });
-  const [isEditing, setIsEditing] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEvents, setSelectedEvents] = useState<Event[]>([]);
   const {
     year,
     month,
@@ -49,34 +43,29 @@ const Calendar = () => {
   };
 
   const handleDateClick = (date: string) => {
+    const eventsOnDate = events.filter((event) => event.date === date);
     setSelectedDate(date);
+    setSelectedEvents(eventsOnDate);
     setIsModalOpen(true);
-    const event = events.find((event) => event.date === date);
-    if (event) {
-      setNewEvent(event);
-      setIsEditing(true);
-    } else {
-      setNewEvent({ id: Date.now(), title: "", date, reminder: "" });
-      setIsEditing(false);
-    }
   };
 
-  const handleSaveEvent = () => {
-    if (newEvent.title && newEvent.date && newEvent.reminder) {
-      if (isEditing) {
-        dispatch(updateEvent(newEvent));
+  const handleSaveAllEvents = () => {
+    selectedEvents.forEach((event) => {
+      if (!event.title || !event.reminder) return;
+
+      const isExisting = events.some((ev) => ev.id === event.id);
+      if (isExisting) {
+        dispatch(updateEvent(event));
       } else {
-        dispatch(addEvent(newEvent));
+        dispatch(addEvent(event));
       }
-      setNewEvent({ id: 0, title: "", date: "", reminder: "" });
-      setSelectedDate("");
-      setIsModalOpen(false);
-    }
+    });
+    setIsModalOpen(false);
   };
 
-  const handleDeleteEvent = () => {
-    dispatch(removeEvent(newEvent.id));
-    setIsModalOpen(false);
+  const handleDeleteEvent = (id: number) => {
+    dispatch(removeEvent(id));
+    setSelectedEvents((prev) => prev.filter((ev) => ev.id !== id));
   };
 
   const handleGoToToday = () => {
@@ -160,10 +149,9 @@ const Calendar = () => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           selectedDate={selectedDate}
-          newEvent={newEvent}
-          setNewEvent={setNewEvent}
-          isEditing={isEditing}
-          handleSaveEvent={handleSaveEvent}
+          selectedEvents={selectedEvents}
+          setSelectedEvents={setSelectedEvents}
+          handleSaveAllEvents={handleSaveAllEvents}
           handleDeleteEvent={handleDeleteEvent}
         />
       </div>
