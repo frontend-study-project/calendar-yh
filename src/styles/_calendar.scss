@@ -79,13 +79,14 @@
   cursor: pointer;
   background: #fff;
   position: relative;
+  border-radius: 0.5rem;
   &:hover {
     background: #f0f8ff;
   }
 }
 
 .calendar-day.today-highlight {
-  background-color: #ffdd57; // 원하는 강조 색상
+  background-color: #66ba84; // 원하는 강조 색상
   color: #333;
   font-weight: bold;
   border-radius: 0.5rem;
@@ -98,11 +99,11 @@
 }
 
 .has-event {
-  background: #ffeb3b; // 이벤트가 있는 날짜 강조
+  background: #007bff; // 이벤트가 있는 날짜 강조
 }
 
 .event-badge {
-  background: #007bff;
+  background: none;
   color: white;
   font-size: 12px;
   padding: 2px 4px;
