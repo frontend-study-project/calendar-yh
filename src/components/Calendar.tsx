@@ -147,7 +147,8 @@ const Calendar = () => {
                   }`}
                   onClick={() => handleDateClick(formattedDate)}
                 >
-                  {day}
+                  <span>{day}</span>
+                  {isToday && <div className="today-label">오늘</div>}
                   {hasEvent && <span className="event-badge">📌</span>}
                 </div>
               );

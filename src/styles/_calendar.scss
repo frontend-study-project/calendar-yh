@@ -90,6 +90,12 @@
   border-radius: 0.5rem;
 }
 
+.today-label {
+  font-size: 0.75rem;
+  color: red;
+  margin-top: 4px;
+}
+
 .has-event {
   background: #ffeb3b; // 이벤트가 있는 날짜 강조
 }
