@@ -1,5 +1,6 @@
-@import "variables";
-@import "mixins";
+@use "variables";
+@use "mixins";
+@use "sass:color";
 
 .calendar-container {
   display: flex;
@@ -12,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: $primary-color;
+  background-color: color.scale(variables.$primary-color);
   color: white;
 }
 .calendar-top {

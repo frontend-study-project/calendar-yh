@@ -1,8 +1,8 @@
-@import "variables";
-@import "mixins";
-@import "calendar";
-@import "form";
-@import "events";
+@use "variables";
+@use "mixins";
+@use "calendar";
+@use "form";
+@use "events";
 
 body {
   font-family: Arial, sans-serif;

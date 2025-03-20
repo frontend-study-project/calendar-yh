@@ -1,3 +1,6 @@
+@use "variables";
+@use "sass:color";
+
 .event-list {
   display: flex;
   flex-direction: column;
@@ -7,14 +10,14 @@
 .event-item {
   background: #fff;
   padding: 1rem;
-  border-radius: $border-radius;
+  border-radius: variables.$border-radius;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .edit-button {
-    color: $primary-color;
+    color: color.scale(variables.$primary-color);
     cursor: pointer;
   }
 
