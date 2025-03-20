@@ -112,7 +112,12 @@ const Calendar = () => {
       </header>
 
       <div className="calendar-body">
-        <EventSidebar events={events} onSelectDate={handleDateClick} />
+        <EventSidebar
+          events={events}
+          onSelectDate={handleDateClick}
+          year={year}
+          month={month}
+        />
 
         <main className="calendar-main">
           <div className="calendar-grid">
