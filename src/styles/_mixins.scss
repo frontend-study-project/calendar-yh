@@ -1,3 +1,5 @@
+@use "variables";
+
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -5,11 +7,11 @@
 }
 
 @mixin button-style($bg-color) {
-  background-color: $bg-color;
+  background-color: variables.$bg-color;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: $border-radius;
+  border-radius: variables.$border-radius;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
