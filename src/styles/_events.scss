@@ -15,7 +15,9 @@
   cursor: pointer;
   margin-bottom: 4px;
 }
-
+.today-highlight .event-date {
+  color: #e53935; // 오늘 날짜는 빨간색 강조
+}
 .event-sublist {
   display: flex;
   flex-direction: column;

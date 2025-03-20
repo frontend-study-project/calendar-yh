@@ -23,6 +23,12 @@ const groupEventsByDate = (events: Event[]) => {
 const EventSidebar = ({ events, onSelectDate }: EventSidebarProps) => {
   // 날짜별로 정렬
   const groupedEvents = groupEventsByDate(events);
+  // 오늘 날짜 구하기 (yyyy-mm-dd)
+  const today = new Date();
+  const todayString = `${today.getFullYear()}-${String(
+    today.getMonth() + 1
+  ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  // 날짜 오름차순 정렬
   const sortedDates = Object.keys(groupedEvents).sort();
 
   return (
@@ -35,18 +41,20 @@ const EventSidebar = ({ events, onSelectDate }: EventSidebarProps) => {
           {sortedDates.map((date) => (
             <li key={date} className="event-date-group">
               <strong className="event-date" onClick={() => onSelectDate(date)}>
-                📅 {date}
+                📅 {date} {date === todayString && <span>(오늘)</span>}
               </strong>
               <ul className="event-sublist">
-                {groupedEvents[date].map((event) => (
-                  <li
-                    key={event.id}
-                    className="event-item"
-                    onClick={() => onSelectDate(event.date)}
-                  >
-                    ⏰ {event.reminder} - {event.title}
-                  </li>
-                ))}
+                {groupedEvents[date]
+                  .sort((a, b) => a.reminder.localeCompare(b.reminder))
+                  .map((event) => (
+                    <li
+                      key={event.id}
+                      className="event-item"
+                      onClick={() => onSelectDate(event.date)}
+                    >
+                      ⏰ {event.reminder} - {event.title}
+                    </li>
+                  ))}
               </ul>
             </li>
           ))}
